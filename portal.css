@@ -1,0 +1,343 @@
+/* ── Portal — Design Tokens (inherited from STW) ──────────── */
+:root {
+  --ink: #0f1114;
+  --paper: #f6f3ee;
+  --terra: #c05a30;
+  --terra-dark: #9a4526;
+  --sage: #4a6b52;
+  --slate: #6b6e74;
+  --ghost: #d4d0c8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Instrument Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+::selection { background: var(--terra); color: white; }
+
+/* ── Nav ──────────────────────────────────────────────────── */
+.portal-nav {
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ghost);
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+.nav-mark {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.3rem 0.55rem;
+  letter-spacing: 0.04em;
+}
+.nav-name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+.nav-back {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--slate);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+
+/* ── Auth Gate ────────────────────────────────────────────── */
+#auth-gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 62px);
+  padding: 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--ghost);
+  padding: 2.5rem 2.2rem;
+  background: var(--paper);
+}
+
+.auth-card .label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--terra);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.auth-card h1 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+
+.auth-card .sub {
+  font-size: 0.9rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* ── Social Login Buttons ─────────────────────────────────── */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1.5px solid var(--ghost);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.social-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Google */
+.social-btn.google {
+  background: white;
+  color: var(--ink);
+  border-color: var(--ghost);
+}
+.social-btn.google:hover {
+  border-color: var(--ink);
+  background: #f8f8f8;
+}
+
+/* GitHub */
+.social-btn.github {
+  background: #24292f;
+  color: white;
+  border-color: #24292f;
+}
+.social-btn.github:hover {
+  background: #1a1e23;
+  border-color: #1a1e23;
+}
+
+/* Twitter / X */
+.social-btn.twitter {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.social-btn.twitter:hover {
+  background: #1a1d22;
+  border-color: #1a1d22;
+}
+
+.auth-divider {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--slate);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.4rem 0;
+  position: relative;
+}
+
+.auth-note {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--slate);
+  margin-top: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ── Dashboard ────────────────────────────────────────────── */
+#portal-dashboard {
+  display: none;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--ghost);
+}
+
+.user-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: none;
+}
+
+.user-info .greeting {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.user-info .email {
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-top: 0.2rem;
+}
+
+/* ── Booking Card ─────────────────────────────────────────── */
+.booking-card {
+  border: 1px solid var(--ghost);
+  padding: 2.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s;
+}
+.booking-card:hover {
+  border-color: var(--ink);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+.booking-card .label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--terra);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.booking-card h2 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.booking-card p {
+  font-size: 0.9rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--terra);
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+}
+.btn-primary:hover {
+  background: var(--terra-dark);
+  transform: translateY(-1px);
+}
+
+/* ── Sign Out ─────────────────────────────────────────────── */
+.sign-out-btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--slate);
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  transition: color 0.2s;
+}
+.sign-out-btn:hover { color: var(--terra); }
+
+/* ── Toast Notifications ──────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 300;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-error {
+  background: var(--ink);
+  color: var(--paper);
+  border-left: 3px solid var(--terra);
+}
+.toast-warn {
+  background: var(--ink);
+  color: var(--paper);
+  border-left: 3px solid #e0a030;
+}
+.toast-info {
+  background: var(--ink);
+  color: var(--paper);
+  border-left: 3px solid var(--sage);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .portal-nav { padding: 1rem 1.5rem; }
+  #auth-gate { padding: 1.5rem; }
+  .auth-card { padding: 2rem 1.5rem; }
+  #portal-dashboard { padding: 2.5rem 1.5rem; }
+  .booking-card { padding: 2rem 1.5rem; }
+  .dashboard-header { flex-direction: column; text-align: center; }
+}

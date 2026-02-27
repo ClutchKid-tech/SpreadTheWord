@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spread the Word — Ship Your MVP in 2 Weeks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Calendly widget -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<style>
+  :root {
+    --ink: #0f1114;
+    --paper: #f6f3ee;
+    --terra: #c05a30;
+    --terra-dark: #9a4526;
+    --sage: #4a6b52;
+    --slate: #6b6e74;
+    --ghost: #d4d0c8;
+    --highlight: #fef3cd;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--terra); color: white; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(246,243,238,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--ghost); }
+  .nav-left { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-mark {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+    background: var(--ink); color: var(--paper);
+    padding: 0.3rem 0.55rem; letter-spacing: 0.04em;
+  }
+  .nav-name {
+    font-family: var(--sans); font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; font-weight: 500; color: var(--slate);
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-family: var(--sans); font-size: 0.75rem; font-weight: 600;
+    background: var(--ink); color: var(--paper);
+    border: none; padding: 0.6rem 1.4rem; cursor: pointer;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--terra); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+    line-height: 1.05; max-width: 900px;
+    opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--terra);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; bottom: 0.06em; left: 0; right: 0;
+    height: 0.06em; background: var(--terra); opacity: 0.4;
+  }
+  .hero-sub {
+    font-size: 1.15rem; line-height: 1.65; color: var(--slate);
+    max-width: 520px; margin-top: 2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
+  }
+  .btn-primary {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+    background: var(--terra); color: white; border: none;
+    padding: 0.9rem 2rem; cursor: pointer;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--terra-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+    background: transparent; color: var(--ink); border: 1.5px solid var(--ink);
+    padding: 0.9rem 2rem; cursor: pointer;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { background: var(--ink); color: var(--paper); }
+
+  /* Hero speed counter */
+  .hero-speed {
+    position: absolute; right: 2.5rem; bottom: 4rem;
+    text-align: right;
+    opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .hero-speed .number {
+    font-family: var(--serif); font-size: clamp(5rem, 12vw, 9rem);
+    line-height: 0.85; color: var(--ink);
+  }
+  .hero-speed .unit {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--slate);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    border-top: 1px solid var(--ghost);
+    border-bottom: 1px solid var(--ghost);
+    padding: 1rem 0; overflow: hidden;
+    position: relative;
+  }
+  .ticker-track {
+    display: flex; gap: 3rem; white-space: nowrap;
+    animation: scroll 20s linear infinite;
+  }
+  .ticker-item {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+    color: var(--slate); letter-spacing: 0.06em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .ticker-item .dot {
+    width: 4px; height: 4px; background: var(--terra); border-radius: 50%;
+  }
+
+  /* ── MANIFESTO ── */
+  .manifesto {
+    padding: 8rem 2.5rem;
+    max-width: 780px;
+  }
+  .manifesto .label {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .manifesto p {
+    font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    line-height: 1.4; color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .manifesto p .dim { color: var(--slate); }
+  .manifesto p .mark {
+    background: var(--highlight); padding: 0.05em 0.15em;
+    text-decoration: none;
+  }
+
+  /* ── HOW (Process) ── */
+  .how {
+    padding: 6rem 2.5rem 8rem;
+    background: var(--ink); color: var(--paper);
+  }
+  .how .section-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .how .section-head h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+  }
+  .how .section-head .note {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--slate);
+    letter-spacing: 0.06em; max-width: 300px; text-align: right;
+  }
+  .process-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .process-step {
+    padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .process-step:hover { background: rgba(255,255,255,0.03); }
+  .step-num {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  .step-title {
+    font-family: var(--serif); font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .step-time {
+    font-family: var(--mono); font-size: 0.65rem; color: var(--sage);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .step-time::before {
+    content: ''; width: 16px; height: 1px; background: var(--sage);
+  }
+  .step-body {
+    font-size: 0.9rem; line-height: 1.65; color: rgba(255,255,255,0.55);
+  }
+
+  /* ── PROOF ── */
+  .proof {
+    padding: 8rem 2.5rem;
+  }
+  .proof .label {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .proof h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400; margin-bottom: 4rem; max-width: 600px;
+  }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border-top: 1px solid var(--ghost); border-bottom: 1px solid var(--ghost);
+  }
+  .stat-card {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--ghost);
+    transition: background 0.3s;
+  }
+  .stat-card:last-child { border-right: none; }
+  .stat-card:hover { background: rgba(0,0,0,0.015); }
+  .stat-num {
+    font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1; margin-bottom: 0.6rem;
+  }
+  .stat-num .accent { color: var(--terra); }
+  .stat-label {
+    font-size: 0.8rem; color: var(--slate); line-height: 1.5;
+  }
+
+  /* Case studies */
+  .cases {
+    margin-top: 5rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .case-card {
+    border: 1px solid var(--ghost);
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .case-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  }
+  .case-tag {
+    font-family: var(--mono); font-size: 0.6rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .case-title {
+    font-family: var(--serif); font-size: 1.6rem; margin-bottom: 0.8rem;
+  }
+  .case-desc {
+    font-size: 0.9rem; line-height: 1.65; color: var(--slate);
+    margin-bottom: 1.5rem;
+  }
+  .case-result {
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    padding: 0.6rem 1rem;
+    background: rgba(192,90,48,0.06);
+    color: var(--terra-dark);
+    display: inline-block;
+  }
+
+  /* ── PRICING ── */
+  .pricing {
+    padding: 6rem 2.5rem 8rem;
+    background: var(--ink); color: var(--paper);
+  }
+  .pricing .label {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .pricing h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400; margin-bottom: 1rem;
+  }
+  .pricing .pricing-sub {
+    font-size: 1rem; color: var(--slate); max-width: 560px;
+    line-height: 1.65; margin-bottom: 4rem;
+  }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .price-card {
+    padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    transition: all 0.3s;
+  }
+  .price-card:hover { background: rgba(255,255,255,0.02); }
+  .price-card.featured {
+    background: rgba(192,90,48,0.08);
+    border-color: rgba(192,90,48,0.2);
+  }
+  .price-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute; top: -0.7rem; left: 2.5rem;
+    font-family: var(--mono); font-size: 0.55rem; font-weight: 500;
+    color: var(--paper); background: var(--terra);
+    padding: 0.25rem 0.6rem; letter-spacing: 0.08em;
+  }
+  .price-name {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .price-amount {
+    font-family: var(--serif); font-size: 2.8rem; margin-bottom: 0.3rem;
+  }
+  .price-model {
+    font-family: var(--mono); font-size: 0.65rem; color: var(--sage);
+    letter-spacing: 0.04em; margin-bottom: 2rem;
+  }
+  .price-includes {
+    list-style: none; margin-bottom: 2rem;
+  }
+  .price-includes li {
+    font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .price-includes li::before {
+    content: '→'; color: var(--terra); font-size: 0.7rem;
+  }
+  .price-btn {
+    font-family: var(--sans); font-size: 0.75rem; font-weight: 600;
+    width: 100%; padding: 0.8rem;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    background: transparent; color: var(--paper);
+    cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .price-btn:hover { background: var(--terra); border-color: var(--terra); }
+  .price-card.featured .price-btn {
+    background: var(--terra); border-color: var(--terra);
+  }
+  .price-card.featured .price-btn:hover {
+    background: var(--terra-dark); border-color: var(--terra-dark);
+  }
+
+  /* ── FOUNDER ── */
+  .founder {
+    padding: 8rem 2.5rem;
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 4rem; align-items: center;
+  }
+  .founder-photo {
+    aspect-ratio: 3/4;
+    background: var(--ghost);
+    position: relative;
+    overflow: hidden;
+  }
+  .founder-photo video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .founder-info .label {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+    color: var(--terra); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .founder-info h2 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400; margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .founder-info p {
+    font-size: 1rem; line-height: 1.75; color: var(--slate);
+    margin-bottom: 1.2rem;
+  }
+  .founder-info .note {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--ink); letter-spacing: 0.02em;
+    padding: 1.2rem 1.5rem; margin-top: 1.5rem;
+    border-left: 3px solid var(--terra);
+    background: rgba(192,90,48,0.04);
+    line-height: 1.6;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    padding: 8rem 2.5rem;
+    text-align: center;
+    border-top: 1px solid var(--ghost);
+  }
+  .cta h2 {
+    font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400; margin-bottom: 1.5rem;
+  }
+  .cta h2 em { font-style: italic; color: var(--terra); }
+  .cta p {
+    font-size: 1rem; color: var(--slate); margin-bottom: 2.5rem;
+    max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65;
+  }
+  .cta .btn-primary { font-size: 0.85rem; padding: 1rem 2.5rem; }
+
+  .cta-note {
+    font-family: var(--mono); font-size: 0.65rem; color: var(--slate);
+    letter-spacing: 0.04em; margin-top: 1.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 2.5rem;
+    border-top: 1px solid var(--ghost);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-left {
+    font-size: 0.75rem; color: var(--slate);
+  }
+  .footer-links {
+    display: flex; gap: 1.5rem;
+  }
+  .footer-links a {
+    font-family: var(--mono); font-size: 0.65rem; color: var(--slate);
+    text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ── QUOTE MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,17,20,.55);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    opacity: 0; visibility: hidden;
+    transition: opacity .3s, visibility .3s;
+  }
+  .modal-overlay.open { opacity: 1; visibility: visible; }
+  .modal-overlay.open .modal { transform: translateY(0); opacity: 1; }
+  .modal {
+    background: var(--paper);
+    width: 100%; max-width: 640px;
+    max-height: 90vh; overflow-y: auto;
+    padding: 2.5rem 2.2rem;
+    box-shadow: 0 24px 80px rgba(0,0,0,.2);
+    transform: translateY(20px); opacity: 0;
+    transition: transform .35s ease, opacity .35s ease;
+  }
+  .modal-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 1.8rem;
+  }
+  .modal-header h2 {
+    font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink);
+  }
+  .modal-header p {
+    font-size: .85rem; color: var(--slate); margin-top: .3rem;
+  }
+  .modal-close {
+    background: none; border: none; cursor: pointer;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--slate); font-size: 1.3rem;
+    transition: color .2s;
+    flex-shrink: 0; margin-left: 1rem;
+  }
+  .modal-close:hover { color: var(--ink); }
+
+  .quote-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; }
+  .form-group label {
+    font-family: var(--mono); font-size: .65rem; font-weight: 500;
+    color: var(--ink); letter-spacing: .04em; text-transform: uppercase;
+    margin-bottom: .35rem;
+  }
+  .form-group label .req { color: var(--terra); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: var(--sans); font-size: .88rem; color: var(--ink);
+    padding: .65rem .85rem;
+    border: 1.5px solid var(--ghost); background: var(--paper);
+    outline: none; transition: border-color .2s, box-shadow .2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--terra);
+    box-shadow: 0 0 0 3px rgba(192,90,48,.1);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--ghost); }
+  .form-group select {
+    cursor: pointer; -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6e74' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .85rem center;
+    padding-right: 2.2rem;
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-divider { height: 1px; background: var(--ghost); margin: .4rem 0; }
+  .form-section-label {
+    font-family: var(--mono); font-size: .6rem; font-weight: 500;
+    color: var(--terra); letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  .form-submit {
+    margin-top: .6rem; padding: .85rem;
+    font-family: var(--sans); font-weight: 600; font-size: .85rem;
+    letter-spacing: .04em; text-transform: uppercase;
+    background: var(--terra); color: white;
+    border: none; cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .form-submit:hover { background: var(--terra-dark); transform: translateY(-1px); }
+  .form-note {
+    text-align: center; font-size: .7rem; color: var(--slate); margin-top: .2rem;
+  }
+
+  /* thank-you state */
+  .thank-you {
+    display: none; text-align: center; padding: 3rem 1rem;
+  }
+  .thank-you.show { display: block; }
+  .thank-you.show + #quoteFormWrap { display: none; }
+  .thank-you h2 {
+    font-family: var(--serif); font-size: 1.6rem; color: var(--ink); margin-bottom: .5rem;
+  }
+  .thank-you p { color: var(--slate); font-size: .95rem; line-height: 1.6; }
+  .thank-you .check-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(192,90,48,.08); color: var(--terra);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1rem;
+  }
+  .thank-you .btn-primary { margin-top: 1.5rem; }
+
+  /* submit loading state */
+  .form-submit.loading {
+    opacity: .7; pointer-events: none;
+    position: relative;
+  }
+  .form-submit.loading::after {
+    content: ''; position: absolute;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid rgba(255,255,255,.3);
+    border-top-color: white;
+    animation: spin .6s linear infinite;
+    top: 50%; right: 1.2rem;
+    transform: translateY(-50%);
+  }
+  @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+  @media (max-width: 600px) {
+    .modal { padding: 1.8rem 1.4rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-speed { display: none; }
+    .process-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .stat-card:nth-child(2) { border-right: none; }
+    .cases { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .founder { grid-template-columns: 1fr; }
+    .founder-photo { max-width: 360px; }
+    nav .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .manifesto, .proof, .founder, .cta { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .how, .pricing { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .stats-row { grid-template-columns: 1fr; }
+    .stat-card { border-right: none; border-bottom: 1px solid var(--ghost); }
+    footer { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-left">
+    <span class="nav-mark">STW</span>
+    <span class="nav-name">Spread the Word</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#how">Process</a></li>
+    <li><a href="#proof">Guarantees</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#founder">About</a></li>
+  </ul>
+  <a class="nav-cta" href="portal.html">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">App studio &mdash; Brisbane, AU</p>
+  <h1>We ship your MVP<br>in <em>two weeks</em></h1>
+  <p class="hero-sub">Not two months. Not two quarters. We've rebuilt the development process from scratch to launch real products at a speed traditional agencies can't touch.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="portal.html" style="text-decoration:none; display:inline-block;">Book a Free Call</a>
+    <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See How It Works</button>
+  </div>
+  <div class="hero-speed">
+    <div class="number">14</div>
+    <div class="unit">Day delivery guarantee</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="dot"></span>React Native</span>
+    <span class="ticker-item"><span class="dot"></span>Flutter</span>
+    <span class="ticker-item"><span class="dot"></span>Rapid Prototyping</span>
+    <span class="ticker-item"><span class="dot"></span>API Integrations</span>
+    <span class="ticker-item"><span class="dot"></span>Firebase</span>
+    <span class="ticker-item"><span class="dot"></span>Supabase</span>
+    <span class="ticker-item"><span class="dot"></span>Stripe Connect</span>
+    <span class="ticker-item"><span class="dot"></span>iOS &amp; Android</span>
+    <span class="ticker-item"><span class="dot"></span>Figma to Code</span>
+    <span class="ticker-item"><span class="dot"></span>App Store Submission</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span class="dot"></span>React Native</span>
+    <span class="ticker-item"><span class="dot"></span>Flutter</span>
+    <span class="ticker-item"><span class="dot"></span>Rapid Prototyping</span>
+    <span class="ticker-item"><span class="dot"></span>API Integrations</span>
+    <span class="ticker-item"><span class="dot"></span>Firebase</span>
+    <span class="ticker-item"><span class="dot"></span>Supabase</span>
+    <span class="ticker-item"><span class="dot"></span>Stripe Connect</span>
+    <span class="ticker-item"><span class="dot"></span>iOS &amp; Android</span>
+    <span class="ticker-item"><span class="dot"></span>Figma to Code</span>
+    <span class="ticker-item"><span class="dot"></span>App Store Submission</span>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="label reveal">Why We Exist</div>
+  <p class="reveal">Most app agencies take <span class="dim">12&ndash;16 weeks</span> to ship an MVP. They pad timelines, waterfall their way through discovery, and charge you for meetings about meetings.</p>
+  <p class="reveal">We think that's <span class="mark">broken</span>.</p>
+  <p class="reveal">We stripped out everything that slows agencies down. No 3-week discovery phases. No design-by-committee. No handoffs between six different people. <span class="dim">One founder. One process. One timeline.</span></p>
+  <p class="reveal">The result: what most agencies quote <span class="mark">12&ndash;16 weeks</span> for, we commit to delivering in 14 days. And we put skin in the game &mdash; a portion of our fee is tied to hitting that deadline.</p>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="section-head">
+    <h2 class="reveal">How a 2-week<br>build works</h2>
+    <div class="note reveal">Every project follows this sequence.<br>No exceptions. No scope creep.</div>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <div class="step-title">Strategy Sprint</div>
+      <div class="step-time">Day 1&ndash;2</div>
+      <div class="step-body">We define your core user, map the 3&ndash;5 screens that matter, write the technical spec, and set up your codebase. You approve the wireframes before we write a single line of code.</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">02</div>
+      <div class="step-title">Design &amp; Build</div>
+      <div class="step-time">Day 3&ndash;10</div>
+      <div class="step-body">We design the UI, build the business logic, integrate your APIs, and wire up payments, auth, and data. Daily Loom updates so you see progress in real time &mdash; not a black box for 8 weeks.</div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">03</div>
+      <div class="step-title">Ship &amp; Measure</div>
+      <div class="step-time">Day 11&ndash;14</div>
+      <div class="step-body">QA, performance testing, app store submission. We set up analytics from day one so you have real user data within 48 hours of launch. Then we iterate based on what the numbers say.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof" id="proof">
+  <div class="label reveal">Our Commitments</div>
+  <h2 class="reveal">What we guarantee,<br>in writing</h2>
+  <div class="stats-row">
+    <div class="stat-card reveal">
+      <div class="stat-num">14<span class="accent">d</span></div>
+      <div class="stat-label">Delivery target for<br>every MVP build</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num">$0<span class="accent">*</span></div>
+      <div class="stat-label">Milestone fee if we<br>miss the deadline</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num">1<span class="accent">:</span>1</div>
+      <div class="stat-label">You work directly with<br>the founder. No handoffs.</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num">Day<span class="accent">1</span></div>
+      <div class="stat-label">Analytics live from<br>launch. Real data, not guesses.</div>
+    </div>
+  </div>
+
+  <div class="cases">
+    <div class="case-card reveal" style="grid-column: 1 / -1; text-align: center; padding: 3.5rem 2.5rem;">
+      <div class="case-tag">Now Accepting Projects</div>
+      <div class="case-title" style="font-size: 1.8rem; max-width: 600px; margin: 0 auto 1rem;">Be our first case study</div>
+      <div class="case-desc" style="max-width: 520px; margin: 0 auto 1.5rem;">We're a new studio with a bold model. Our first three clients get a founding rate &mdash; a significant discount &mdash; in exchange for an honest testimonial and permission to publish the results.</div>
+      <button class="btn-primary" onclick="openCalendly()">Claim a Founding Spot</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="label reveal">How We Work</div>
+  <h2 class="reveal">Three ways to start</h2>
+  <p class="pricing-sub reveal">Every engagement begins with a conversation. Book a 20-minute call and I'll tell you which option fits your project &mdash; with a fixed quote before we hang up.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-name">Discovery Sprint</div>
+      <div class="price-amount" style="font-size:1.8rem;">2 days</div>
+      <div class="price-model">Fixed fee &middot; Paid upfront</div>
+      <ul class="price-includes">
+        <li>User research &amp; competitive audit</li>
+        <li>Wireframes for core screens</li>
+        <li>Technical spec &amp; architecture</li>
+        <li>Go/no-go recommendation</li>
+      </ul>
+      <button class="price-btn" onclick="openCalendly()">Get a Quote</button>
+    </div>
+    <div class="price-card featured reveal">
+      <div class="price-name">2-Week MVP</div>
+      <div class="price-amount" style="font-size:1.8rem;">14 days</div>
+      <div class="price-model">Fixed price &middot; Deadline guaranteed</div>
+      <ul class="price-includes">
+        <li>Everything in Discovery</li>
+        <li>Full design &amp; development</li>
+        <li>App Store / Play Store submission</li>
+        <li>Analytics &amp; crash reporting</li>
+        <li>If we miss the deadline, you pay less</li>
+      </ul>
+      <button class="price-btn" onclick="openCalendly()">Get a Quote</button>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-name">Growth Retainer</div>
+      <div class="price-amount" style="font-size:1.8rem;">Monthly</div>
+      <div class="price-model">Cancel anytime &middot; No lock-in</div>
+      <ul class="price-includes">
+        <li>Dedicated dev hours each month</li>
+        <li>New features &amp; iterations</li>
+        <li>Performance monitoring</li>
+        <li>Priority Slack support</li>
+      </ul>
+      <button class="price-btn" onclick="openCalendly()">Get a Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <div class="founder-photo">
+    <video autoplay muted loop playsinline>
+      <source src="Instagram/instagram-reel-v4 (3).mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="founder-info">
+    <div class="label reveal">Who's Behind This</div>
+    <h2 class="reveal">I'm Alexander King,<br>and I build apps<br>unreasonably fast.</h2>
+    <p class="reveal">I started Spread the Word because I watched founders wait months and spend tens of thousands of dollars on MVPs that should have taken weeks.</p>
+    <p class="reveal">I rebuilt the development process from the ground up to cut out the bloat that makes agencies slow &mdash; the handoffs, the status meetings, the layers of project management. The result is a faster process at a fixed price, with a delivery guarantee built into every contract.</p>
+    <p class="reveal">This studio is new. I'm building it in public &mdash; sharing revenue, process, and results as they happen. I'm based in Brisbane, I work directly with every client, and I stand behind the 14-day commitment with my own fee on the line.</p>
+    <div class="note reveal">
+      I publish my build process, revenue, and lessons learned in public every week. Follow along on <a href="https://instagram.com/spreadtheword" style="color:var(--terra);">Instagram</a>. Want to work together? Book a call above — no email runaround.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <h2 class="reveal">Tell me your <em>idea</em></h2>
+  <p class="reveal">Book a free 20-minute call with Alexander directly. I'll tell you if it's a 2-week build or not &mdash; and give you a fixed quote before we hang up.</p>
+  <div class="reveal" style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <button class="btn-primary" onclick="openCalendly()">Book a Free Call</button>
+    <button class="btn-secondary" onclick="openModal()">Prefer to Write?</button>
+  </div>
+  <div class="cta-note reveal">No pitch deck needed &middot; No obligation &middot; Response within 24h</div>
+</section>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="quoteModal">
+  <div class="modal">
+    <!-- Thank-you screen -->
+    <div class="thank-you" id="thankYou">
+      <div class="check-icon">&#10003;</div>
+      <h2>Quote Request Sent</h2>
+      <p>Thanks! We've sent a confirmation to your email<span id="smsConfirmText"></span>. We'll review your project and get back to you within 24 hours.</p>
+      <button class="btn-primary" onclick="closeModal()">Close</button>
+    </div>
+
+    <div id="quoteFormWrap">
+      <div class="modal-header">
+        <div>
+          <h2>Get a Free Quote</h2>
+          <p>Tell us about your project. We'll respond within 24 hours.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+      </div>
+      <form class="quote-form" id="quoteForm" action="https://formsubmit.co/alexanderrexking@gmail.com" method="POST">
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_subject" value="New Quote Request — Spread the Word" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_autoresponse" value="Hi there! Thanks for reaching out to Spread the Word. We've received your project details and our team is already reviewing them. You can expect a personalised response within 24 hours. In the meantime, feel free to reply to this email if you have any additional details to share. — The Spread the Word Team" />
+        <input type="text" name="_honey" style="display:none" />
+
+        <span class="form-section-label">Contact Details</span>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" name="Full Name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address <span class="req">*</span></label>
+            <input type="email" name="Email" placeholder="jane@company.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="Phone" placeholder="+1 (555) 123-4567" />
+          </div>
+          <div class="form-group">
+            <label>Company / Organization</label>
+            <input type="text" name="Company" placeholder="Acme Inc." />
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+        <span class="form-section-label">Project Details</span>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>What do you need? <span class="req">*</span></label>
+            <select name="App Type" required>
+              <option value="" disabled selected>Select type</option>
+              <option value="Mobile App (iOS)">Mobile App (iOS)</option>
+              <option value="Mobile App (Android)">Mobile App (Android)</option>
+              <option value="Mobile App (Both)">Mobile App (iOS + Android)</option>
+              <option value="Web Application">Web Application</option>
+              <option value="Mobile + Web">Mobile + Web App</option>
+              <option value="UI/UX Design Only">UI/UX Design Only</option>
+              <option value="Not Sure Yet">Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estimated Budget <span class="req">*</span></label>
+            <select name="Budget" required>
+              <option value="" disabled selected>Select range</option>
+              <option value="Under $5,000">Under $5,000</option>
+              <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+              <option value="$10,000 - $25,000">$10,000 - $25,000</option>
+              <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+              <option value="$50,000+">$50,000+</option>
+              <option value="Not sure">Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Timeline</label>
+            <select name="Timeline">
+              <option value="" disabled selected>When do you need it?</option>
+              <option value="ASAP">As soon as possible</option>
+              <option value="1-2 months">1 - 2 months</option>
+              <option value="3-4 months">3 - 4 months</option>
+              <option value="5-6 months">5 - 6 months</option>
+              <option value="6+ months">6+ months</option>
+              <option value="Flexible">Flexible / no rush</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>How did you find us?</label>
+            <select name="Referral Source">
+              <option value="" disabled selected>Select one</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Referral">Referral / Word of mouth</option>
+              <option value="Blog / Article">Blog or article</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Project Description <span class="req">*</span></label>
+          <textarea name="Project Description" placeholder="Describe your app idea, key features, target users, and any specific requirements or challenges..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Anything else we should know?</label>
+          <textarea name="Additional Notes" placeholder="Links to inspiration, existing branding, technical constraints, competitor apps..." style="min-height:70px"></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Submit Quote Request</button>
+        <p class="form-note">We'll never share your information. Expect a reply within 1 business day.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">&copy; 2026 Spread the Word. Brisbane, AU.</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/spreadtheword" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  // Navbar
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  // Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── CALENDLY POPUP ─────────────────────────────────────
+  function openCalendly() {
+    Calendly.initPopupWidget({
+      url: 'https://calendly.com/spreadtheword_appdeveloper',
+      color: '#c05a30',
+      textColor: '#0f1114',
+      branding: false
+    });
+  }
+
+  // ── QUOTE MODAL ─────────────────────────────────────────
+  const TEXTBELT_KEY = 'textbelt';
+
+  const modal = document.getElementById('quoteModal');
+  const form = document.getElementById('quoteForm');
+  const thankYou = document.getElementById('thankYou');
+  const formWrap = document.getElementById('quoteFormWrap');
+  const smsConfirmText = document.getElementById('smsConfirmText');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      thankYou.classList.remove('show');
+      formWrap.style.display = '';
+      form.reset();
+      smsConfirmText.textContent = '';
+    }, 350);
+  }
+
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // ── FORM SUBMISSION ─────────────────────────────────────
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('.form-submit');
+    submitBtn.classList.add('loading');
+    submitBtn.textContent = 'Sending...';
+
+    const formData = new FormData(form);
+    const name = formData.get('Full Name');
+    const phone = formData.get('Phone');
+
+    // 1) Send form data to FormSubmit
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (err) {}
+
+    // 2) Send SMS confirmation if a phone number was provided
+    let smsSent = false;
+    if (phone && phone.trim().length >= 7) {
+      try {
+        const smsRes = await fetch('https://textbelt.com/text', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: phone.trim(),
+            message: 'Hi ' + name + '! Thanks for requesting a quote from Spread the Word. We\'ve received your project details and will get back to you within 24 hours. — Spread the Word',
+            key: TEXTBELT_KEY
+          })
+        });
+        const smsData = await smsRes.json();
+        smsSent = smsData.success === true;
+      } catch (err) {}
+    }
+
+    // 3) Show thank-you screen
+    submitBtn.classList.remove('loading');
+    submitBtn.textContent = 'Submit Quote Request';
+
+    if (smsSent) {
+      smsConfirmText.textContent = ' and phone';
+    }
+
+    formWrap.style.display = 'none';
+    thankYou.classList.add('show');
+  });
+</script>
+</body>
+</html>
